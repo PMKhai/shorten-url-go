@@ -20,23 +20,23 @@ This is a simple URL shortener application implemented in Go. It takes long URLs
 
 2. Change to the project directory:
 
-  ```
-  cd shorten-url-go
-  ```
+    ```
+    cd shorten-url-go
+    ```
 
 
 3. Install the dependencies:
 
-  ```
-  go mod download
-  ```
+    ```
+    go mod download
+    ```
 
 
 4. Build and run the application:
-  ```
-  go build -o build/ShortenUrl
-  ./build/ShortenUrl
-  ```
+    ```
+    go build -o build/ShortenUrl
+    ./build/ShortenUrl
+    ```
 
 
 Please note that this README.md file assumes the following:
