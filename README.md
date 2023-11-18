@@ -2,6 +2,8 @@
 
 This is a simple URL shortener application implemented in Go. It takes long URLs and generates shorter, more manageable URLs.
 
+[Demo](https://freebird-url-shorter-7b62d9ab626f.herokuapp.com)
+
 ## Getting Started
 
 
@@ -14,7 +16,7 @@ This is a simple URL shortener application implemented in Go. It takes long URLs
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/-go.git
+   git clone https://github.com/PMKhai/shorten-url-go.git
    ```
 
 
