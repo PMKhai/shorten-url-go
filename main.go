@@ -114,13 +114,13 @@ func handleRedirect(w http.ResponseWriter, r *http.Request) {
 func generateShortKey() string {
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	const keyLength = 6
+	randGen := rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	rand.Seed(time.Now().UnixNano())
-	shortKey := make([]byte, keyLength)
-	for i := range shortKey {
-		shortKey[i] = charset[rand.Intn(len(charset))]
+	builder := strings.Builder{}
+	for i := 0; i < keyLength; i++ {
+		builder.WriteByte(charset[randGen.Intn(len(charset))])
 	}
-	return string(shortKey)
+	return builder.String()
 }
 
 func getEnvOrDefault(key, defaultValue string) string {
