@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -11,16 +12,21 @@ import (
 var urls = make(map[string]string)
 
 const (
-	PORT = "3031"
+	DEFAULT_PORT = "3031"
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = DEFAULT_PORT
+	}
+
 	http.HandleFunc("/", handleForm)
 	http.HandleFunc("/shorten", handleShorten)
 	http.HandleFunc("/short/", handleRedirect)
 
-	fmt.Printf("URL Shortener is running on %s", PORT)
-	http.ListenAndServe(fmt.Sprintf(":%s", PORT), nil)
+	fmt.Printf("URL Shortener is running on %s", port)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
 
 func handleForm(w http.ResponseWriter, r *http.Request) {
