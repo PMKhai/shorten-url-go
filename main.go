@@ -12,20 +12,19 @@ import (
 var urls = make(map[string]string)
 
 const (
-	DEFAULT_PORT = "3031"
+	DEFAULT_PORT   = "3031"
+	DEFAULT_DOMAIN = "http://localhost:3031"
 )
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = DEFAULT_PORT
-	}
+	port := getEnvOrDefault("PORT", DEFAULT_PORT)
+	domain := getEnvOrDefault("DOMAIN", DEFAULT_DOMAIN)
 
 	http.HandleFunc("/", handleForm)
 	http.HandleFunc("/shorten", handleShorten)
 	http.HandleFunc("/short/", handleRedirect)
 
-	fmt.Printf("URL Shortener is running on %s", port)
+	fmt.Printf("URL Shortener is running on %s", domain)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
 
@@ -70,8 +69,10 @@ func handleShorten(w http.ResponseWriter, r *http.Request) {
 	shortKey := generateShortKey()
 	urls[shortKey] = originalURL
 
+	domain := getEnvOrDefault("DOMAIN", DEFAULT_DOMAIN)
+
 	// Construct the full shortened URL
-	shortenedURL := fmt.Sprintf("https://freebird-url-shorter-7b62d9ab626f.herokuapp.com/short/%s", shortKey)
+	shortenedURL := fmt.Sprintf("%s/short/%s", domain, shortKey)
 
 	// Serve the result page
 	w.Header().Set("Content-Type", "text/html")
@@ -120,4 +121,12 @@ func generateShortKey() string {
 		shortKey[i] = charset[rand.Intn(len(charset))]
 	}
 	return string(shortKey)
+}
+
+func getEnvOrDefault(key, defaultValue string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return defaultValue
+	}
+	return value
 }
