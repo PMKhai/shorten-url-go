@@ -11,7 +11,7 @@ import (
 var urls = make(map[string]string)
 
 const (
-	PORT = "3030"
+	PORT = "3031"
 )
 
 func main() {
@@ -65,7 +65,7 @@ func handleShorten(w http.ResponseWriter, r *http.Request) {
 	urls[shortKey] = originalURL
 
 	// Construct the full shortened URL
-	shortenedURL := fmt.Sprintf("http://localhost:3030/short/%s", shortKey)
+	shortenedURL := fmt.Sprintf("https://freebird-url-shorter-7b62d9ab626f.herokuapp.com/short/%s", shortKey)
 
 	// Serve the result page
 	w.Header().Set("Content-Type", "text/html")

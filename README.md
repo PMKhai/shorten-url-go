@@ -43,6 +43,6 @@ Please note that this README.md file assumes the following:
 
 You have set up your Go project structure accordingly.
 You have a PostgreSQL database (but you can modify it to use any other database).
-The application will be accessible at http://localhost:3030.
+The application will be accessible at http://localhost:3031.
 Feel free to modify and customize this template according to your project's specific requirements.
 
